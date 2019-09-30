@@ -1,35 +1,54 @@
 dist: xenial
 language: cpp
 os: linux
+
+addons:
+  apt:
+    sources: &base_sources
+    - ubuntu-toolchain-r-test
+    sources: &clang_sources
+    - llvm-toolchain-xenial-7
+
 matrix:
   include:
     - compiler: gcc
       env: GCC_VERSION=5 BUILD_TYPE=Release
       addons:
         apt:
+          sources:
+           - *base_sources
           packages:
            - g++-5
     - compiler: gcc
       env: GCC_VERSION=6 BUILD_TYPE=Release
       addons:
         apt:
+          sources:
+           - *base_sources
           packages:
            - g++-6
     - compiler: gcc
       env: GCC_VERSION=7 BUILD_TYPE=Release
       addons:
         apt:
+          sources:
+           - *base_sources
           packages:
            - g++-7
     - compiler: clang
       env: CLANG_VERSION=7 GCC_VERSION=8 BUILD_TYPE=Release
       addons:
         apt:
+          sources:
+           - *base_sources
+           - *clang_sources
           packages:
            - g++-8
            - clang-7
+
 script:
   - make tests
   - test -z "$(awk '{print $1}' report | grep -v 0)"
+
 after_failure:
   - cat tests/*diff
