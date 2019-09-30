@@ -1,4 +1,4 @@
-CXXFLAGS = -ansi -pedantic -std=c++11 -Wall -Werror -Isrc/
+CXXFLAGS = -pedantic -std=c++11 -Wall -Werror -Isrc/
 
 TEST_SOURCES = $(wildcard tests/test_*.cpp)
 TEST_BIN = $(patsubst %.cpp,%,$(TEST_SOURCES))
