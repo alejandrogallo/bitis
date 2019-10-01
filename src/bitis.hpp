@@ -137,9 +137,9 @@ struct SRLatch: public Component {
 };
 struct Multiplexer: public Component {
   Wire *a, *b, *sel, *out;
-  Multiplexer(Wire *A, Wire *B, Wire *SEL, Wire *OUT) {
-    inputs = {A, B, SEL}; outputs = {OUT};
-    a = A; b = B; sel = SEL; out = OUT;
+  Multiplexer(Wire *A, Wire *B, Wire *SEL, Wire *OUT):
+    a(A), b(B), sel(SEL), out(OUT) {
+    inputs = {a, b, sel}; outputs = {out};
   }
   void operator()() {
     if (sel->get() == L) {
