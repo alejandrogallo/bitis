@@ -48,7 +48,7 @@ matrix:
 
 script:
   - make tests
-  - test -z "$(awk '{print $1}' report | grep -v 0)"
+  - test -z "$(awk '{print $1}' tests/report | grep -v 0)"
 
 after_failure:
   - cat tests/*diff
