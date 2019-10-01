@@ -62,6 +62,7 @@ struct Clock: public Wire {
       [](Component* c) { c->onRise(); });
     set(H);
   }
+  void tick() { get() == L ? rise() : fall(); }
   void attach(Component *c) { cs.push_back(c); }
   private:
   std::vector<Component*> cs;
